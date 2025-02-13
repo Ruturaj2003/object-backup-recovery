@@ -1,4 +1,4 @@
-/* Reset and base styling */
+/* Global Reset and Base Styling */
 * {
   margin: 0;
   padding: 0;
@@ -30,24 +30,30 @@ header p {
   color: #7f8c8d;
 }
 
-/* Layout for Two Columns */
+/* Three-Column Layout */
 .layout {
   display: flex;
   gap: 20px;
 }
 
-/* Left Column: fixed/smaller width */
+/* Left Column: Backup & Recover */
 .left-col {
   flex: 1;
   max-width: 320px;
 }
 
-/* Right Column: larger area */
-.right-col {
-  flex: 3;
+/* Middle Column: Backed-Up Files */
+.middle-col {
+  flex: 1;
+  max-width: 320px;
 }
 
-/* Card Styling for each section */
+/* Right Column: Local Files (wider) */
+.right-col {
+  flex: 2;
+}
+
+/* Card Styling */
 .card {
   background: #fff;
   border-radius: 8px;

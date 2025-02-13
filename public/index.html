@@ -20,18 +20,17 @@
 
     <main>
       <div class="layout">
-        <!-- Left Column: Backup and Recover -->
+        <!-- Left Column: Backup All & Recover -->
         <div class="left-col">
           <section class="card backup">
             <h2>Backup Files</h2>
-            <p>Securely backup your local files to Dropbox.</p>
-            <button id="backupBtn" class="btn primary">Start Backup</button>
+            <p>Backup all local files to Dropbox.</p>
+            <button id="backupBtn" class="btn primary">Backup All Files</button>
             <p id="backupStatus" class="status"></p>
           </section>
-
           <section class="card recover">
             <h2>Recover File</h2>
-            <p>Enter the file name you wish to recover.</p>
+            <p>Enter file name to recover from Dropbox.</p>
             <input
               type="text"
               id="recoverFileName"
@@ -42,19 +41,32 @@
           </section>
         </div>
 
-        <!-- Right Column: List of Backed-Up Files -->
-        <div class="right-col">
+        <!-- Middle Column: Backed-Up Files (from Dropbox) -->
+        <div class="middle-col">
           <section class="card list">
             <h2>Backed-Up Files</h2>
-            <button id="listBtn" class="btn primary">Refresh File List</button>
+            <button id="listBtn" class="btn primary">
+              Refresh Backup List
+            </button>
             <ul id="filesList" class="file-list"></ul>
+          </section>
+        </div>
+
+        <!-- Right Column: Local Files -->
+        <div class="right-col">
+          <section class="card local">
+            <h2>Local Files</h2>
+            <button id="localListBtn" class="btn primary">
+              Refresh Local File List
+            </button>
+            <ul id="localFilesList" class="file-list"></ul>
           </section>
         </div>
       </div>
     </main>
 
     <footer>
-      <p>&copy; 2025 Your Company. All rights reserved.</p>
+      <p>&copy; 2025 Dotaizz. All rights reserved.</p>
     </footer>
 
     <!-- Link to external JavaScript file -->

@@ -90,6 +90,45 @@ app.get('/api/list', async (req, res) => {
   }
 });
 
+app.get('/api/local', async (req, res) => {
+  try {
+    const localFiles = fs
+      .readdirSync(localDirectory)
+      .filter((file) => fs.lstatSync(path.join(localDirectory, file)).isFile());
+    res.json(localFiles);
+  } catch (error) {
+    console.error('Local file list error:', error);
+    res.status(500).json({ error: 'Error listing local files.' });
+  }
+});
+
+app.get('/api/backup-file', async (req, res) => {
+  const fileName = req.query.file;
+  if (!fileName) {
+    return res.status(400).send('Please provide a file name.');
+  }
+  try {
+    const filePath = path.join(localDirectory, fileName);
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).send('File not found.');
+    }
+    if (!fs.lstatSync(filePath).isFile()) {
+      return res.status(400).send('Not a valid file.');
+    }
+    const contents = fs.readFileSync(filePath);
+    const dropboxPath = `/backup/${fileName}`;
+    await dbx.filesUpload({
+      path: dropboxPath,
+      contents: contents,
+      mode: { '.tag': 'overwrite' },
+    });
+    res.send(`File ${fileName} backed up successfully.`);
+  } catch (error) {
+    console.error('Backup file error:', error);
+    res.status(500).send('Error backing up file.');
+  }
+});
+
 // Now serve static files (your web interface) from the "public" folder
 app.use(express.static('public'));
 
