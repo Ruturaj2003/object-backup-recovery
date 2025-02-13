@@ -1,6 +1,3 @@
-Here’s a simple and clean `README.md` file for your project:
-
-````
 # Backup & Recovery System
 
 A simple web-based system to backup and recover files using Node.js, Express, and Dropbox API.
@@ -22,11 +19,11 @@ A simple web-based system to backup and recover files using Node.js, Express, an
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository_url>
    cd <repository_folder>
    ```
-````
 
 2. **Install dependencies**
 
