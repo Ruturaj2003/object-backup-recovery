@@ -36,21 +36,15 @@ header p {
   gap: 20px;
 }
 
-/* Left Column: Backup & Recover */
+/* Left Column: Fixed width */
 .left-col {
-  flex: 1;
-  max-width: 320px;
+  flex: 0 0 320px;
 }
 
-/* Middle Column: Backed-Up Files */
-.middle-col {
-  flex: 1;
-  max-width: 320px;
-}
-
-/* Right Column: Local Files (wider) */
+/* Middle & Right Columns: Equal width */
+.middle-col,
 .right-col {
-  flex: 2;
+  flex: 1;
 }
 
 /* Card Styling */
@@ -125,9 +119,12 @@ input[type='text'] {
 }
 
 /* File List Styling */
+/* File List Styling */
 .file-list {
   list-style-type: none;
   margin-top: 10px;
+  max-height: 500px; /* Set your desired max-height */
+  overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .file-list li {
