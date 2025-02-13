@@ -30,12 +30,21 @@ header p {
   color: #7f8c8d;
 }
 
-/* Main Content Styling */
-main {
+/* Layout for Two Columns */
+.layout {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   gap: 20px;
+}
+
+/* Left Column: fixed/smaller width */
+.left-col {
+  flex: 1;
+  max-width: 320px;
+}
+
+/* Right Column: larger area */
+.right-col {
+  flex: 3;
 }
 
 /* Card Styling for each section */
@@ -44,8 +53,7 @@ main {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 300px;
-  max-width: 90%;
+  margin-bottom: 20px;
   transition: transform 0.2s;
 }
 

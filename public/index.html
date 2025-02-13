@@ -19,30 +19,38 @@
     </header>
 
     <main>
-      <section class="card">
-        <h2>Backup Files</h2>
-        <p>Securely backup your local files to Dropbox.</p>
-        <button id="backupBtn" class="btn primary">Start Backup</button>
-        <p id="backupStatus" class="status"></p>
-      </section>
+      <div class="layout">
+        <!-- Left Column: Backup and Recover -->
+        <div class="left-col">
+          <section class="card backup">
+            <h2>Backup Files</h2>
+            <p>Securely backup your local files to Dropbox.</p>
+            <button id="backupBtn" class="btn primary">Start Backup</button>
+            <p id="backupStatus" class="status"></p>
+          </section>
 
-      <section class="card">
-        <h2>Recover File</h2>
-        <p>Enter the file name you wish to recover.</p>
-        <input
-          type="text"
-          id="recoverFileName"
-          placeholder="e.g., example.txt"
-        />
-        <button id="recoverBtn" class="btn secondary">Recover File</button>
-        <p id="recoverStatus" class="status"></p>
-      </section>
+          <section class="card recover">
+            <h2>Recover File</h2>
+            <p>Enter the file name you wish to recover.</p>
+            <input
+              type="text"
+              id="recoverFileName"
+              placeholder="e.g., example.txt"
+            />
+            <button id="recoverBtn" class="btn secondary">Recover File</button>
+            <p id="recoverStatus" class="status"></p>
+          </section>
+        </div>
 
-      <section class="card">
-        <h2>Backed-Up Files</h2>
-        <button id="listBtn" class="btn primary">Refresh File List</button>
-        <ul id="filesList" class="file-list"></ul>
-      </section>
+        <!-- Right Column: List of Backed-Up Files -->
+        <div class="right-col">
+          <section class="card list">
+            <h2>Backed-Up Files</h2>
+            <button id="listBtn" class="btn primary">Refresh File List</button>
+            <ul id="filesList" class="file-list"></ul>
+          </section>
+        </div>
+      </div>
     </main>
 
     <footer>
