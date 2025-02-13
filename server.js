@@ -1,8 +1,16 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const { Dropbox } = require('dropbox');
-const fetch = require('node-fetch');
+import dotenv from 'dotenv';
+dotenv.config();
+
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import { Dropbox } from 'dropbox';
+import fetch from 'node-fetch';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = 3000;
