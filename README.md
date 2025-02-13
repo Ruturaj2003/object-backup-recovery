@@ -1,6 +1,6 @@
 Here’s a simple and clean `README.md` file for your project:
 
-````markdown
+````
 # Backup & Recovery System
 
 A simple web-based system to backup and recover files using Node.js, Express, and Dropbox API.
