@@ -17,6 +17,13 @@
         padding: 10px;
         margin: 5px;
       }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin: 10px 0;
+      }
     </style>
   </head>
   <body>
@@ -29,7 +36,7 @@
     </section>
 
     <section>
-      <h2>Recover File</h2>
+      <h2>Recover File Manually</h2>
       <input
         type="text"
         id="recoverFileName"
@@ -39,15 +46,21 @@
       <p id="recoverStatus"></p>
     </section>
 
+    <section>
+      <h2>Backed-Up Files</h2>
+      <button id="listBtn">Refresh File List</button>
+      <ul id="filesList"></ul>
+    </section>
+
     <script>
-      // Trigger backup
+      // Backup action: calls the /api/backup endpoint when the button is clicked
       document
         .getElementById('backupBtn')
         .addEventListener('click', async () => {
           document.getElementById('backupStatus').textContent =
             'Starting backup...';
           try {
-            const response = await fetch('/backup');
+            const response = await fetch('/api/backup');
             const text = await response.text();
             document.getElementById('backupStatus').textContent = text;
           } catch (error) {
@@ -56,7 +69,7 @@
           }
         });
 
-      // Trigger recovery for a given file
+      // Recovery action for manual input
       document
         .getElementById('recoverBtn')
         .addEventListener('click', async () => {
@@ -70,7 +83,7 @@
             'Starting recovery...';
           try {
             const response = await fetch(
-              '/recover?file=' + encodeURIComponent(fileName)
+              '/api/recover?file=' + encodeURIComponent(fileName)
             );
             const text = await response.text();
             document.getElementById('recoverStatus').textContent = text;
@@ -79,6 +92,43 @@
               'Error: ' + error;
           }
         });
+
+      // List backed-up files and display them
+      document.getElementById('listBtn').addEventListener('click', async () => {
+        try {
+          const response = await fetch('/api/list');
+          const files = await response.json();
+          const filesList = document.getElementById('filesList');
+          filesList.innerHTML = ''; // Clear existing list
+
+          files.forEach((file) => {
+            const li = document.createElement('li');
+            li.textContent = file;
+
+            // Add a recover button for each file
+            const recoverBtn = document.createElement('button');
+            recoverBtn.textContent = 'Recover';
+            recoverBtn.style.marginLeft = '10px';
+            recoverBtn.addEventListener('click', async () => {
+              try {
+                const res = await fetch(
+                  '/api/recover?file=' + encodeURIComponent(file)
+                );
+                const text = await res.text();
+                alert(text);
+              } catch (err) {
+                alert('Error: ' + err);
+              }
+            });
+
+            li.appendChild(recoverBtn);
+            filesList.appendChild(li);
+          });
+        } catch (error) {
+          console.error('Error fetching file list: ', error);
+          alert('Error listing files.');
+        }
+      });
     </script>
   </body>
 </html>

@@ -15,10 +15,10 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = 3000;
 
-// Serve static files (web interface) from the public folder
-app.use(express.static('public'));
+// IMPORTANT: Define your API endpoints before serving static files
+// Mount all API endpoints under the "/api" prefix
 
-// Replace with your actual Dropbox access token
+// Replace with your actual Dropbox access token (loaded from .env)
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 const dbx = new Dropbox({ accessToken: ACCESS_TOKEN, fetch: fetch });
 
@@ -26,7 +26,7 @@ const dbx = new Dropbox({ accessToken: ACCESS_TOKEN, fetch: fetch });
 const localDirectory = path.join(__dirname, 'files');
 
 // **Backup Endpoint:** Loops through each file in the local folder and uploads it to Dropbox.
-app.get('/backup', async (req, res) => {
+app.get('/api/backup', async (req, res) => {
   try {
     const files = fs.readdirSync(localDirectory);
     for (const file of files) {
@@ -51,7 +51,7 @@ app.get('/backup', async (req, res) => {
 });
 
 // **Recovery Endpoint:** Downloads a specified file from Dropbox based on a query parameter.
-app.get('/recover', async (req, res) => {
+app.get('/api/recover', async (req, res) => {
   const fileName = req.query.file;
   if (!fileName) {
     return res
@@ -77,6 +77,21 @@ app.get('/recover', async (req, res) => {
     res.status(500).send('Error during recovery');
   }
 });
+
+// **List Endpoint:** Lists files in the Dropbox /backup folder.
+app.get('/api/list', async (req, res) => {
+  try {
+    const response = await dbx.filesListFolder({ path: '/backup' });
+    const files = response.result.entries.map((entry) => entry.name);
+    res.json(files);
+  } catch (error) {
+    console.error('List error:', error);
+    res.status(500).json({ error: 'Error listing files.' });
+  }
+});
+
+// Now serve static files (your web interface) from the "public" folder
+app.use(express.static('public'));
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
