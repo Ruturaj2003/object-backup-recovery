@@ -9,5 +9,10 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "dropbox": "^10.34.0",
+    "express": "^4.21.2",
+    "node-fetch": "^3.3.2"
+  }
 }
