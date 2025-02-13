@@ -1,4 +1,3 @@
-/* Global Reset and Base Styling */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +12,6 @@ body {
   padding: 20px;
 }
 
-/* Header Styling */
 header {
   text-align: center;
   margin-bottom: 30px;
@@ -30,24 +28,20 @@ header p {
   color: #7f8c8d;
 }
 
-/* Three-Column Layout */
 .layout {
   display: flex;
   gap: 20px;
 }
 
-/* Left Column: Fixed width */
 .left-col {
   flex: 0 0 320px;
 }
 
-/* Middle & Right Columns: Equal width */
 .middle-col,
 .right-col {
   flex: 1;
 }
 
-/* Card Styling */
 .card {
   background: #fff;
   border-radius: 8px;
@@ -72,7 +66,6 @@ header p {
   color: #555;
 }
 
-/* Button Styling */
 .btn {
   display: inline-block;
   padding: 10px 20px;
@@ -102,7 +95,6 @@ header p {
   background: #27ae60;
 }
 
-/* Input Field Styling */
 input[type='text'] {
   width: calc(100% - 20px);
   padding: 10px;
@@ -111,20 +103,17 @@ input[type='text'] {
   border-radius: 4px;
 }
 
-/* Status Message Styling */
 .status {
   margin-top: 10px;
   font-size: 0.9rem;
   color: #e74c3c;
 }
 
-/* File List Styling */
-/* File List Styling */
 .file-list {
   list-style-type: none;
   margin-top: 10px;
-  max-height: 500px; /* Set your desired max-height */
-  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .file-list li {
@@ -152,7 +141,6 @@ input[type='text'] {
   background: #d35400;
 }
 
-/* Footer Styling */
 footer {
   text-align: center;
   margin-top: 40px;
