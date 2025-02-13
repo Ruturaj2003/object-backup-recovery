@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Backup & Recovery System</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      input,
+      button {
+        padding: 10px;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Data Backup and Recovery</h1>
+
+    <section>
+      <h2>Backup Files</h2>
+      <button id="backupBtn">Start Backup</button>
+      <p id="backupStatus"></p>
+    </section>
+
+    <section>
+      <h2>Recover File</h2>
+      <input
+        type="text"
+        id="recoverFileName"
+        placeholder="Enter file name (e.g., example.txt)"
+      />
+      <button id="recoverBtn">Recover File</button>
+      <p id="recoverStatus"></p>
+    </section>
+
+    <script>
+      // Trigger backup
+      document
+        .getElementById('backupBtn')
+        .addEventListener('click', async () => {
+          document.getElementById('backupStatus').textContent =
+            'Starting backup...';
+          try {
+            const response = await fetch('/backup');
+            const text = await response.text();
+            document.getElementById('backupStatus').textContent = text;
+          } catch (error) {
+            document.getElementById('backupStatus').textContent =
+              'Error: ' + error;
+          }
+        });
+
+      // Trigger recovery for a given file
+      document
+        .getElementById('recoverBtn')
+        .addEventListener('click', async () => {
+          const fileName = document.getElementById('recoverFileName').value;
+          if (!fileName) {
+            document.getElementById('recoverStatus').textContent =
+              'Please enter a file name.';
+            return;
+          }
+          document.getElementById('recoverStatus').textContent =
+            'Starting recovery...';
+          try {
+            const response = await fetch(
+              '/recover?file=' + encodeURIComponent(fileName)
+            );
+            const text = await response.text();
+            document.getElementById('recoverStatus').textContent = text;
+          } catch (error) {
+            document.getElementById('recoverStatus').textContent =
+              'Error: ' + error;
+          }
+        });
+    </script>
+  </body>
+</html>
