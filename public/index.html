@@ -2,83 +2,74 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Backup & Recovery System</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
-      h1,
-      h2 {
-        color: #333;
-      }
-      input,
-      button {
-        padding: 10px;
-        margin: 5px;
-      }
-    </style>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Google Fonts for a professional look -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1>Data Backup and Recovery</h1>
+    <header>
+      <h1>Data Backup & Recovery</h1>
+      <p>Your reliable backup solution</p>
+    </header>
 
-    <section>
-      <h2>Backup Files</h2>
-      <button id="backupBtn">Start Backup</button>
-      <p id="backupStatus"></p>
-    </section>
+    <main>
+      <div class="layout">
+        <!-- Left Column: Backup All & Recover -->
+        <div class="left-col">
+          <section class="card backup">
+            <h2>Backup Files</h2>
+            <p>Backup all local files to Dropbox.</p>
+            <button id="backupBtn" class="btn primary">Backup All Files</button>
+            <p id="backupStatus" class="status"></p>
+          </section>
+          <section class="card recover">
+            <h2>Recover File</h2>
+            <p>Enter file name to recover from Dropbox.</p>
+            <input
+              type="text"
+              id="recoverFileName"
+              placeholder="e.g., example.txt"
+            />
+            <button id="recoverBtn" class="btn secondary">Recover File</button>
+            <p id="recoverStatus" class="status"></p>
+          </section>
+        </div>
 
-    <section>
-      <h2>Recover File</h2>
-      <input
-        type="text"
-        id="recoverFileName"
-        placeholder="Enter file name (e.g., example.txt)"
-      />
-      <button id="recoverBtn">Recover File</button>
-      <p id="recoverStatus"></p>
-    </section>
+        <!-- Middle Column: Backed-Up Files (from Dropbox) -->
+        <div class="middle-col">
+          <section class="card list">
+            <h2>Backed-Up Files</h2>
+            <button id="listBtn" class="btn primary">
+              Refresh Backup List
+            </button>
+            <ul id="filesList" class="file-list"></ul>
+          </section>
+        </div>
 
-    <script>
-      // Trigger backup
-      document
-        .getElementById('backupBtn')
-        .addEventListener('click', async () => {
-          document.getElementById('backupStatus').textContent =
-            'Starting backup...';
-          try {
-            const response = await fetch('/backup');
-            const text = await response.text();
-            document.getElementById('backupStatus').textContent = text;
-          } catch (error) {
-            document.getElementById('backupStatus').textContent =
-              'Error: ' + error;
-          }
-        });
+        <!-- Right Column: Local Files -->
+        <div class="right-col">
+          <section class="card local">
+            <h2>Local Files</h2>
+            <button id="localListBtn" class="btn primary">
+              Refresh Local File List
+            </button>
+            <ul id="localFilesList" class="file-list"></ul>
+          </section>
+        </div>
+      </div>
+    </main>
 
-      // Trigger recovery for a given file
-      document
-        .getElementById('recoverBtn')
-        .addEventListener('click', async () => {
-          const fileName = document.getElementById('recoverFileName').value;
-          if (!fileName) {
-            document.getElementById('recoverStatus').textContent =
-              'Please enter a file name.';
-            return;
-          }
-          document.getElementById('recoverStatus').textContent =
-            'Starting recovery...';
-          try {
-            const response = await fetch(
-              '/recover?file=' + encodeURIComponent(fileName)
-            );
-            const text = await response.text();
-            document.getElementById('recoverStatus').textContent = text;
-          } catch (error) {
-            document.getElementById('recoverStatus').textContent =
-              'Error: ' + error;
-          }
-        });
-    </script>
+    <footer>
+      <p>&copy; 2025 Dotaizz. All rights reserved.</p>
+    </footer>
+
+    <!-- Link to external JavaScript file -->
+    <script src="main.js"></script>
   </body>
 </html>
